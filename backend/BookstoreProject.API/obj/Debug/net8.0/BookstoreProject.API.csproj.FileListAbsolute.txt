@@ -69,3 +69,4 @@ C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net
 C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net8.0\BookstoreProject.API.pdb
 C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net8.0\BookstoreProject.API.genruntimeconfig.cache
 C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net8.0\ref\BookstoreProject.API.dll
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net8.0\BookstoreProject.API.sourcelink.json
