@@ -16,6 +16,19 @@ namespace BookstoreProject.API.Controllers
 
         public IActionResult GetBooks(int pageSize = 5, int pageNum = 1) 
         {
+
+            //cookie stuff
+
+            string? favCategory = Request.Cookies["FavoriteCategory"];
+            Console.WriteLine("~~~~~~~COOKIE~~~~~~~\n" + favCategory);
+
+            HttpContext.Response.Cookies.Append("FavoriteCategory", "Classic", new CookieOptions{
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.Now.AddMinutes(1)
+            });
+
             var bookStuff = _bookstoreContext.Books
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize)

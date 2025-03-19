@@ -12,7 +12,10 @@ function BookList() {
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
-        `https://localhost:5000/api/Bookstore?pageSize=${pageSize}&pageNum=${pageNum}`
+        `https://localhost:5000/api/Bookstore?pageSize=${pageSize}&pageNum=${pageNum}`,
+        {
+          credentials: 'include',
+        }
       );
       const data = await response.json();
       setBooks(data.books);
