@@ -12,7 +12,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   useEffect(() => {
     const fetchBooks = async () => {
       const categoryParams = selectedCategories
-        .map((cat) => `projectTypes=${encodeURIComponent(cat)}`)
+        .map((cat) => `bookCategories=${encodeURIComponent(cat)}`)
         .join('&');
 
       const response = await fetch(

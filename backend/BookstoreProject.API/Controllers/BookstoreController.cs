@@ -24,12 +24,14 @@ namespace BookstoreProject.API.Controllers
                 query = query.Where(b => bookCategories.Contains(b.Category));
             }
 
+            var totalBooks = query.Count();
+
             var bookStuff = query
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
-            var totalBooks = _bookstoreContext.Books.Count();
+            
 
             return Ok(new
             {

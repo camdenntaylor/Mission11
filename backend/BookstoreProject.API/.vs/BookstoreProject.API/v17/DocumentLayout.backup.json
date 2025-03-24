@@ -42,8 +42,7 @@
               "RelativeToolTip": ".gitignore",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-24T19:15:05.664Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T19:15:05.664Z"
             },
             {
               "$type": "Document",
@@ -53,7 +52,7 @@
               "RelativeDocumentMoniker": "Controllers\\BookstoreController.cs",
               "ToolTip": "C:\\Users\\camde\\source\\repos\\Mission11\\backend\\BookstoreProject.API\\Controllers\\BookstoreController.cs",
               "RelativeToolTip": "Controllers\\BookstoreController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwAoAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-17T21:25:07.133Z",
               "EditorCaption": ""
