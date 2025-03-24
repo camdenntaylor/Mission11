@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Book } from './types/Book';
 
-function BookList() {
+function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
@@ -11,8 +11,12 @@ function BookList() {
 
   useEffect(() => {
     const fetchBooks = async () => {
+      const categoryParams = selectedCategories
+        .map((cat) => `projectTypes=${encodeURIComponent(cat)}`)
+        .join('&');
+
       const response = await fetch(
-        `https://localhost:5000/api/Bookstore?pageSize=${pageSize}&pageNum=${pageNum}`
+        `https://localhost:5000/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`
       );
       const data = await response.json();
       setBooks(data.books);
@@ -21,7 +25,7 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageSize, pageNum]);
+  }, [pageSize, pageNum, totalItems, selectedCategories]);
 
   // Sort books client-side before rendering
   const sortedBooks = [...books].sort((a, b) => {
@@ -34,8 +38,6 @@ function BookList() {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">📚 Book List</h1>
-
       {/* Sort Dropdown */}
       <div className="mb-3 d-flex align-items-center gap-2">
         <label htmlFor="sortSelect" className="form-label mb-0">
