@@ -17,11 +17,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     console.log('Adding item to cart:', item);
     setCart((prevCart) => {
       const existingItem = prevCart.find((c) => c.bookId === item.bookId);
-      const updatedCart = prevCart.map((c) =>
-        c.bookId === item.bookId ? { ...c, price: c.price + item.price } : c
-      );
 
-      return existingItem ? updatedCart : [...prevCart, item];
+      if (existingItem) {
+        return prevCart.map((c) =>
+          c.bookId === item.bookId
+            ? { ...c, quantity: c.quantity + 1, price: c.price + item.price }
+            : c
+        );
+      }
+
+      // If item is not in cart, add it with quantity 1
+      return [...prevCart, { ...item, quantity: 1 }];
     });
   };
 

@@ -5,7 +5,7 @@ import { CartItem } from '../types/CartItem';
 
 function BuyPage() {
   const navigate = useNavigate();
-  const { title, price, bookId } = useParams();
+  const { title, price, bookId, quantity } = useParams();
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
@@ -13,6 +13,7 @@ function BuyPage() {
       bookId: Number(bookId),
       title: title || 'no title found',
       price: Number(price),
+      quantity: Number(quantity),
     };
     addToCart(newItem);
     navigate('/cart');

@@ -17,8 +17,15 @@ function CartPage() {
           <ul>
             {cart.map((item: CartItem) => (
               <li key={item.bookId}>
-                {item.title}: Qty: {} Subtotal: ${item.price}
-                <button onClick={() => removeFromCart(item.bookId)}>
+                <strong>{item.title}</strong>: <strong>Qty:</strong>{' '}
+                {item.quantity} <strong>Price:</strong>{' '}
+                {(Number(item.price.toFixed(2)) / item.quantity).toFixed(2)}{' '}
+                <strong>Subtotal: $</strong>
+                {item.price.toFixed(2)}{' '}
+                <button
+                  className="btn btn-sm btn-danger"
+                  onClick={() => removeFromCart(item.bookId)}
+                >
                   Remove
                 </button>
               </li>
@@ -26,7 +33,7 @@ function CartPage() {
           </ul>
         )}
       </div>
-      <h3>Total: ${totalAmount}</h3>
+      <h3>Total: ${totalAmount.toFixed(2)}</h3>
       <button>Check out</button>
       <br />
       <br />
