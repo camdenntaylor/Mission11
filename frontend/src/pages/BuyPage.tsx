@@ -1,9 +1,22 @@
 import Welcome from '../components/Welcome';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { CartItem } from '../types/CartItem';
 
 function BuyPage() {
   const navigate = useNavigate();
-  const { title, price } = useParams();
+  const { title, price, bookId } = useParams();
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const newItem: CartItem = {
+      bookId: Number(bookId),
+      title: title || 'no title found',
+      price: Number(price),
+    };
+    addToCart(newItem);
+    navigate('/cart');
+  };
 
   return (
     <>
@@ -11,7 +24,7 @@ function BuyPage() {
       <h2>Buy {title}</h2>
       <h3>Price: ${price}</h3>
 
-      <button className="btn btn-success" onClick={() => navigate('/cart')}>
+      <button className="btn btn-success" onClick={handleAddToCart}>
         Add to cart
       </button>
       <br />
