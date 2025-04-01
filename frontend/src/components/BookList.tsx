@@ -1,33 +1,43 @@
 import { useEffect, useState } from 'react';
 import { Book } from '../types/Book';
 import { useNavigate } from 'react-router-dom';
+import { fetchBooks } from '../api/BooksAPI';
+import Pagination from './Pagination';
 
 function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
-  const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // NEW
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const categoryParams = selectedCategories
-        .map((cat) => `bookCategories=${encodeURIComponent(cat)}`)
-        .join('&');
+    const loadBooks = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchBooks(pageSize, pageNum, selectedCategories);
 
-      const response = await fetch(
-        `https://localhost:5000/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`
-      );
-      const data = await response.json();
-      setBooks(data.books);
-      setTotalItems(data.totalBooks);
-      setTotalPages(Math.ceil(data.totalBooks / pageSize));
+        setBooks(data.books);
+        setTotalPages(
+          data.totalBooks && pageSize > 0
+            ? Math.ceil(data.totalBooks / pageSize)
+            : 1
+        );
+      } catch (error) {
+        setError((error as Error).message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchBooks();
-  }, [pageSize, pageNum, totalItems, selectedCategories]);
+    loadBooks();
+  }, [pageSize, pageNum, selectedCategories]);
+
+  if (loading) return <p>Loading Books...</p>;
+  if (error) return <p className="text-red-500">Error: {error}</p>;
 
   // Sort books client-side before rendering
   const sortedBooks = [...books].sort((a, b) => {
@@ -102,55 +112,16 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
           </div>
         ))}
       </div>
-
-      {/* Pagination Controls */}
-      <div className="d-flex justify-content-center align-items-center gap-2 my-4 flex-wrap">
-        <button
-          className="btn btn-outline-secondary"
-          disabled={pageNum === 1}
-          onClick={() => setPageNum(pageNum - 1)}
-        >
-          ◀ Previous
-        </button>
-
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i + 1}
-            className={`btn ${pageNum === i + 1 ? 'btn-primary' : 'btn-outline-primary'}`}
-            onClick={() => setPageNum(i + 1)}
-          >
-            {i + 1}
-          </button>
-        ))}
-
-        <button
-          className="btn btn-outline-secondary"
-          disabled={pageNum === totalPages}
-          onClick={() => setPageNum(pageNum + 1)}
-        >
-          Next ▶
-        </button>
-      </div>
-
-      {/* Results Per Page */}
-      <div className="d-flex align-items-center gap-2 mb-5">
-        <label htmlFor="pageSizeSelect" className="form-label mb-0">
-          Results per page:
-        </label>
-        <select
-          id="pageSizeSelect"
-          className="form-select w-auto"
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-            setPageNum(1);
-          }}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
-      </div>
+      <Pagination
+        currentPage={pageNum}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        onPageChange={setPageNum}
+        onPageSizeChange={(newSize) => {
+          setPageSize(newSize);
+          setPageNum(1);
+        }}
+      />
     </div>
   );
 }
