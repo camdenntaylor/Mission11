@@ -16,12 +16,11 @@ builder.Services.AddDbContext<BookstoreDbContext>(options =>
 builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactAppBlah",
     policy => {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:3000", "https://red-moss-02b3b271e.6.azurestaticapps.net")
         .AllowAnyMethod()
         .AllowAnyHeader();
     }));
 
-//WithOrigins("http://localhost:3000", "https://red-moss-02b3b271e.6.azurestaticapps.net")
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
