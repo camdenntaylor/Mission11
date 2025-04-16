@@ -70,3 +70,9 @@ C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net
 C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net8.0\ref\BookstoreProject.API.dll
 C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\obj\Debug\net8.0\BookstoreProject.API.sourcelink.json
 C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\Bookstore.sqlite
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\publish\web.config
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\publish\appsettings.Development.json
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\publish\appsettings.json
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\publish\BookstoreProject.API.deps.json
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\publish\BookstoreProject.API.runtimeconfig.json
+C:\Users\camde\source\repos\Mission11\backend\BookstoreProject.API\bin\Debug\net8.0\publish\BookstoreProject.API.staticwebassets.endpoints.json
